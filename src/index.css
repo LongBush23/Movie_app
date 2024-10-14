@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Netflix Sans";
+  src: local("/fonts/NetflixSans-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Netflix Sans";
+  src: local("/fonts/NetflixSans-Bold.woff2") format("woff2");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Netflix Sans";
+  src: local("/fonts/NetflixSans-Medium.woff2") format("woff2");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Netflix Sans";
+  src: local("/fonts/NetflixSans-Light.woff2") format("woff2");
+  font-weight: 300;
+}
+
+body {
+  font-family: "Netflix Sans";
+}
+
+/* Khi ảnh đã tải xong, áp dụng hiệu ứng từ tối -> sáng -> tối */
+.bgAnimation.loaded {
+  animation: brightnessAnimation 5s ease-in-out;
+}
+
+/* Keyframes để điều chỉnh độ sáng */
+@keyframes brightnessAnimation {
+  0% {
+    filter: brightness(0); /* Bắt đầu từ tối */
+  }
+  30% {
+    filter: brightness(0.7);
+  }
+  40% {
+    filter: brightness(0.7); /* Sáng lên */
+  }
+  70% {
+    filter: brightness(0.7);
+  }
+  100% {
+    filter: brightness(0); /* Trở lại tối */
+  }
+}
+
+/*  */
