@@ -2,7 +2,7 @@ export const TRENDING_TABS = [
   {
     id: "all",
     name: "All",
-    url: "/trending/all/day",
+    url: "/trending/all/week",
   },
   {
     id: "movie",
