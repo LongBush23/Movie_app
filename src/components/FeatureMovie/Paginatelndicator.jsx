@@ -9,7 +9,6 @@ const Paginatelndicator = ({ movies, activeMovieId, setActiveMovieId }) => {
       const nextIndex = (currentIndex + 1) % movies.length;
       setActiveMovieId(movies[nextIndex].id);
     }, 5000);
-
     return () => clearInterval(interval);
   }, [movies, activeMovieId, setActiveMovieId]);
 

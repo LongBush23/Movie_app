@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 const ModalContext = createContext();
+// eslint-disable-next-line react-refresh/only-export-components
 export const useModalContext = () => {
   return useContext(ModalContext);
 };
@@ -17,8 +18,13 @@ const ModalProvider = ({ children }) => {
     }
   }, [isShowing]);
 
+  const openPopup = (content) => {
+    setIsShowing(true);
+    setContent(content);
+  };
+
   return (
-    <ModalContext.Provider value={{ setIsShowing, setContent }}>
+    <ModalContext.Provider value={{ openPopup }}>
       {children}
       {isShowing && (
         <div className="fixed inset-0 z-[2]">
