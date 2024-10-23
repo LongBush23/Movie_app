@@ -1,8 +1,12 @@
 import ImageComponent from "@components/ImageComponent";
+import { Link } from "react-router-dom";
 
-const ActorInfo = ({ name, character, profile_path, episodeCount }) => {
+const ActorInfo = ({ id, name, character, profile_path, episodeCount }) => {
   return (
-    <div className="overflow-hidden rounded-lg border border-slate-300 shadow-sm">
+    <Link
+      to={`/people/${id}`}
+      className="overflow-hidden rounded-lg border border-slate-300 shadow-sm"
+    >
       <div>
         <ImageComponent
           width={276}
@@ -19,7 +23,7 @@ const ActorInfo = ({ name, character, profile_path, episodeCount }) => {
           {episodeCount && <p>{episodeCount} Episodes</p>}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 export default ActorInfo;
