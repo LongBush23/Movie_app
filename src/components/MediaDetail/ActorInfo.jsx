@@ -12,9 +12,8 @@ const ActorInfo = ({ id, name, character, profile_path, episodeCount }) => {
           width={276}
           height={350}
           src={
-            profile_path
-              ? `https://media.themoviedb.org/t/p/w276_and_h350_face${profile_path}`
-              : "/ActorNoImage.svg"
+            profile_path &&
+            `https://media.themoviedb.org/t/p/w276_and_h350_face${profile_path}`
           }
         />
         <div className="p-3">

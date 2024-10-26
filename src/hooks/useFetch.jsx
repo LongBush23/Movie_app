@@ -1,9 +1,14 @@
+// src/useFetch.js
 import { useEffect, useState } from "react";
 
+// Sử dụng API token và host từ biến môi trường Vite
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_TOKEN = import.meta.env.VITE_API_TOKEN;
+
+// Header mặc định cho các request API
 const DEFAULT_HEADERS = {
   accept: "application/json",
-  Authorization:
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhY2IzMTkxMTVhOGNhOGIzNjg5MmIyNWRiMzQzNDM4YiIsIm5iZiI6MTcyNzk1MDY5My42MTQyMzYsInN1YiI6IjY2ZmU2ZTliNmZjNzRlNTc1NmY3Y2FmMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.r-PgbmIktTMiNqkGqSXwmxWgUxxWl4hxkkxhD8newiA",
+  Authorization: `Bearer ${API_TOKEN}`,
 };
 
 export default function useFetch(
@@ -12,11 +17,14 @@ export default function useFetch(
 ) {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null); // Thêm state để xử lý lỗi
 
   useEffect(() => {
     if (enabled) {
       setIsLoading(true);
-      fetch(`${import.meta.env.VITE_API_HOST}${url}`, {
+      setError(null); // Reset lỗi trước mỗi lần gọi mới
+
+      fetch(`${API_HOST}${url}`, {
         method,
         headers: {
           ...DEFAULT_HEADERS,
@@ -24,19 +32,22 @@ export default function useFetch(
         },
       })
         .then(async (res) => {
+          if (!res.ok) {
+            throw new Error(`Error: ${res.status} ${res.statusText}`);
+          }
           const data = await res.json();
           setData(data);
         })
         .catch((err) => {
-          console.error(err);
+          console.error("Fetch error:", err);
+          setError(err); // Ghi lỗi vào state
         })
         .finally(() => {
           setIsLoading(false);
         });
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url, method, JSON.stringify(headers), enabled]);
 
-  return { isLoading, data };
+  return { isLoading, data, error };
 }

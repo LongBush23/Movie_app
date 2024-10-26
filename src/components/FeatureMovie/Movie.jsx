@@ -17,10 +17,10 @@ const Movie = (props) => {
   return (
     <div>
       <ImageComponent
-        src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
-        // className={`bgAnimation aspect-video w-full brightness-50 ${isLoaded ? "loaded" : ""}`}
+        src={
+          backdrop_path && `https://image.tmdb.org/t/p/original${backdrop_path}`
+        }
         className={`bgAnimation loaded aspect-video w-full brightness-50`}
-        // onLoad={() => setIsLoaded(true)}
         alt={title}
         width={900}
         height={500}

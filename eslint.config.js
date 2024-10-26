@@ -34,6 +34,8 @@ export default [
         { allowConstantExport: true },
       ],
       "react/prop-types": "off",
+      // eslint-disable-next-line no-dupe-keys
+      "react-refresh/only-export-components": "off",
     },
   },
 ];
